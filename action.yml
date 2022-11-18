@@ -19,9 +19,4 @@ runs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-      name: Check the modules [if chaches do not match]
-      continue-on-error: true
-      run: npm list
-      shell: bash
 
