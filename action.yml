@@ -12,7 +12,7 @@ runs:
       id: cache-npm
       uses: actions/cache@v3
       env:
-        cache-name: node-modules-cache
+        cache-name: node-modules-cache-1
       with:
         path: node_modules
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
@@ -21,7 +21,7 @@ runs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - name: Cache Cypress runner
-      id: cache-cypress-runner
+      id: cache-cypress-runner-1
       uses: actions/cache@v3
       env:
         cache-name: cypress-runner-cache
