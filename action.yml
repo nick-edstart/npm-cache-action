@@ -32,8 +32,8 @@ runs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - if: ${{ steps.cache-cypress-runner.outputs.cache-hit != 'true' }}
-      name: If Cypress runner is not found, we reinstall it selectively
+    - if: ${{ steps.node-modules-cache.outputs.cache-hit == 'true' && steps.cache-cypress-runner.outputs.cache-hit != 'true' }}
+      name: If node modules are cached, but Cypress runner is not found, we reinstall it selectively to speed up the build. Hope it works
       continue-on-error: true
       run: cypress install
       shell: bash
