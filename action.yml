@@ -33,7 +33,7 @@ runs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - if: ${{ steps.cache-cypress-runner.outputs.cache-hit != 'true' }}
-      name: If no Cypress cache found - repair by npm install
+      name: If no Cypress cache found - repair by cleaning the restored cache and running npm install
       continue-on-error: true
-      run: npm install
+      run: rm -rf node_modules; npm install
       shell: bash
