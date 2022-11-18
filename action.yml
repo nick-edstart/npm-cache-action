@@ -1,0 +1,26 @@
+name: "Save/restore NPM cache"
+description: "Caches node_modules and reuses dependencies if no changes to package-lock.json found"
+
+runs:
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    - name: Cache node modules
+      id: cache-npm
+      uses: actions/cache@v3
+      env:
+        cache-name: node-modules-cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+      name: Check the modules [if chaches do not match]
+      continue-on-error: true
+      run: npm list
+
