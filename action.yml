@@ -32,8 +32,8 @@ runs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - if: ${{ steps.node-modules-cache.outputs.cache-hit == 'true' && steps.cache-cypress-runner.outputs.cache-hit != 'true' }}
-      name: If node modules are cached, but Cypress runner is not found, we reinstall it selectively to speed up the build. Hope it works
+    - if: ${{ steps.cache-cypress-runner.outputs.cache-hit != 'true' }}
+      name: If no Cypress cache found - repair by npm install
       continue-on-error: true
-      run: cypress install
+      run: npm install
       shell: bash
