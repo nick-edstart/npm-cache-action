@@ -2,6 +2,7 @@ name: "Save/restore NPM cache"
 description: "Caches node_modules and reuses dependencies if no changes to package-lock.json found"
 
 runs:
+  using: "composite"
   steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
