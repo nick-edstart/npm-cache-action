@@ -23,4 +23,5 @@ runs:
       name: Check the modules [if chaches do not match]
       continue-on-error: true
       run: npm list
+      shell: bash
 
