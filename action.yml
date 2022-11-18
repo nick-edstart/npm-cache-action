@@ -20,3 +20,15 @@ runs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+    - name: Cache Cypress runner
+      id: cache-cypress-runner
+      uses: actions/cache@v3
+      env:
+        cache-name: cypress-runner-cache
+      with:
+        path: /home/runner/.cache/Cypress
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
